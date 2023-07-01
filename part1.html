@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arithmetic Operations</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Arithmetic Operations</h2>
+    <label for="num1">First Number:</label>
+    <input type="text" id="num1">
+    <span id="num1Error" class="error"></span>
+    <br>
+    <label for="num2">Second:</label>
+    <input type="text" id="num2">
+    <span id="num2Error" class="error"></span>
+    <br>
+    <button onclick="performOperation('+')">Add</button>
+    <button onclick="performOperation('-')">Subtract</button>
+    <button onclick="performOperation('*')">Multiply</button>
+    <button onclick="performOperation('/')">Divide</button>
+    <br>
+    <label id="msg"></label>
+
+    <script>
+        function performOperation(operator) {
+            var num1 = document.getElementById('num1').value;
+            var num2 = document.getElementById('num2').value;
+            var msgLabel = document.getElementById('msg');
+            var num1Error = document.getElementById('num1Error');
+            var num2Error = document.getElementById('num2Error');
+            
+            // Clear previous error messages
+            num1Error.textContent = '';
+            num2Error.textContent = '';
+            
+            // Check if input fields are empty
+            if (num1 === '' || num2 === '') {
+                if (num1 === '') {
+                    num1Error.textContent = '* Field is required';
+                }
+                if (num2 === '') {
+                    num2Error.textContent = '* Field is required';
+                }
+                return;
+            }
+            
+            // Check if input values are valid numbers
+            if (isNaN(num1)) {
+                num1Error.textContent = '* Invalid input';
+                return;
+            }
+            
+            if (isNaN(num2)) {
+                num2Error.textContent = '* Invalid input';
+                return;
+            }
+            
+            // Perform the arithmetic operation
+            num1 = parseFloat(num1);
+            num2 = parseFloat(num2);
+            
+            var result;
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+                default:
+                    break;
+            }
+            
+            // Display the result
+            msgLabel.textContent = 'Result: ' + result;
+        }
+    </script>
+</body>
+</html>
